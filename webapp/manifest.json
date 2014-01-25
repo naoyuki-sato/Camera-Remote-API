@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Camera Remote API",
+  "description": "Camera Remote API",
+  "version": "1",
+  "minimum_chrome_version": "23",
+  "app": {
+    "background": {
+    "scripts": ["main.js"]
+   }
+  },
+  "permissions": [
+    "http://*/",
+    "experimental",
+    {"socket": ["udp-send-to", "udp-bind", "udp-multicast-membership"]}
+  ]
+}
