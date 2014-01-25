@@ -7,7 +7,7 @@ This is Web app sample implementation that controls Sony Device via [Camera Remo
 
 for this sample, Web app may not find Device IP address and service end point. IP address and serivce end point are used as the fixed. it will be replaced later w/ SSDP module.
 
-### Hot to run
+### How to run
 * please start WiFi on your Sony Deivce and connect your PC.
 * start Chrome web browser w/ "disable-web-security". this will allow Web app to use "Cross domain XHR".
 > chrome.exe --disable-web-security
