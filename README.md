@@ -5,7 +5,7 @@ Control Sony Device via Camera Remote API
 
 This is Web app sample implementation that controls Sony Device via [Camera Remote API](http://developer.sony.com/develop/cameras/).
 
-for this sample, Web app may not find Device IP address and service end point. IP address and serivce end point are used as the fixed. it will be replaced later w/ SSDP module.
+for this sample, Web app may not find Device IP address and service end point. IP address and serivce end point are used as the fixed. the device discovery will be supported later.
 
 ### How to run
 * please start WiFi on your Sony Deivce and connect your PC.
@@ -21,9 +21,10 @@ for this sample, Web app may not find Device IP address and service end point. I
 * you will be able to control Sony deivce w/ JSON message.
 
 ### To Do List
-* add SSDP to find Device
+* make JavaScript lib of Camera Remote API
+* add SSDP for the device discovery
 * add more actions.
-* have more rich UI
+* more rich UI
 
 License
 ----------
