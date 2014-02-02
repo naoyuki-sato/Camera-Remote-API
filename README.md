@@ -1,6 +1,9 @@
 Camera-Remote-API
 =================
 
+UNDER CONSTRUCTION!!
+CURRENTLY, THIS App MAY NOT WORK!!
+
 Control Sony Device via Camera Remote API
 
 This is Web app sample implementation that controls Sony Device via [Camera Remote API](http://developer.sony.com/develop/cameras/).
