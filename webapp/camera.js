@@ -70,23 +70,6 @@ var ChangeAction = function()
 
 var SendMessage = function()
 {
-    /*
-    response = {"result": [["http://ip:port/postview/postview.jpg"]], "id": 1};
-    console.log(response.result[0][0]);
-    console.log(response.id);
-
-    var url = response.result[0][0];
-    if (url.indexOf("postview.jpg", 0) != -1 && url.indexOf("http://", 0) != -1)
-    {
-        console.log("Bingo");
-        var area = document.getElementById("image-area");
-        var img = document.createElement("img");
-        img.height = 100;
-        //img.border = 5;
-        img.src = "http://8.media.bustedtees.cvcdn.com/f/-/bustedtees.c34d97af-a400-487c-8a63-008b4ed143b6.jpg";
-        area.appendChild(img);
-    }
-    */
     console.log("--- Send Message ---");
 
     var message = document.getElementById("json-message").value;
