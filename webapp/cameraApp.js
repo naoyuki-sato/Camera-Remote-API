@@ -70,12 +70,20 @@ var actions = [
 
         camera.setActionListUrl(actionListUrl);
         camera[actions[action].method](actions[action].params,
+            // success callback
             function(id, response){
                 console.log("--- success response ---")
                 console.log("method: " + actions[action].method);
                 console.log("id: " + id);
                 console.log(response);
+                // capture still picture
+                if(actions[action].method == "actTakePicture")
+                {
+                    console.log("--- actTakePicture ---")
+                    LoadImage(response[0][0]);
+                }
             },
+            // error callback
             function(id, error){
                 console.log("--- error response ---")
                 console.log("id: " + id);
@@ -102,53 +110,5 @@ var LoadImage = function(url)
             area.appendChild(img);
         }
     };
-    xhr.send();
-};
-
-function ab2t(buffer /* ArrayBuffer */)
-{
-    var arr = new Uint8Array(buffer.length);
-    var str = "";
-    for(var i = 0, l = arr.length; i < l; i++)
-    {
-        //str += String.fromCharCode.call(this, arr[i]);
-        arr[i] = buffer.charAt(i).charCodeAt();
-    }
-    console.log(arr[0].toString(16));
-    return arr;
-}
-
-var flg = 0;
-var TestViveview = function()
-{
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', "http://192.168.122.1:8080/liveview/liveviewstream", true);
-    xhr.onreadystatechange = function()
-    {
-        if(flg > 5)
-        {
-            return; 
-        }
-        flg++;
-
-        console.log("---------------------------------------------------------------");
-        console.log("readyState = " + xhr.readyState);
-        console.log("status     = " + xhr.status);
-        console.log(xhr.getAllResponseHeaders());
-        var res = xhr.responseText;
-        var len = res.length;
-        if(len != 0)
-        {
-            console.log(ab2t(res));
-        }
-    }
-    /*
-    xhr.onprogress = function(evt) {
-       console.log("--- onprogress ---"); 
-       console.log("lengthComputable: " + evt.lengthComputable); 
-       console.log("loaded: " + evt.loaded); 
-       console.log("total: " + evt.total); 
-    }
-    */
     xhr.send();
 };

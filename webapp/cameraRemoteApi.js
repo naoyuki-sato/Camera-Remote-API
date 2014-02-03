@@ -36,12 +36,10 @@ function CameraRemoteAPI(actionListUrl) {
 		this[this.methods[i]] = (function(j) {
 			return function (params, successCallback, errorCallback) {
 				this.num = j;
-
-				this.successCallback = successCallback;
-				this.errorCallback = errorCallback;
 				this.endPointUrl = this.actionListUrl + this.service;
 
-				var id = Math.round(new Date().getTime());
+				//var id = Math.round(new Date().getTime());
+				var id = 1;
 
 				var message = "{ \"method\": " + "\"" + this.methods[this.num] + "\", \"params\": " + params + "," + "\"id\": " + id + ", \"version\": " + this.version + "}";
 				console.log(message);
@@ -52,9 +50,9 @@ function CameraRemoteAPI(actionListUrl) {
 					if (xhr.readyState === 4 && xhr.status === 200) {
 						console.log(xhr.responseText);
 						var response = JSON.parse(xhr.responseText);
-						this.successCallback(response.id, response.result);
+						successCallback(response.id, response.result);
 					}
-				}
+				};
 				xhr.open('POST', this.endPointUrl, true);
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(message);
