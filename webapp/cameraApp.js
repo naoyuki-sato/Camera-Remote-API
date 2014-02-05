@@ -5,7 +5,7 @@ var devInfo = [
 
 var actions = [
     {method:"startRecMode", params:'[]'},
-    {method:"setPostviewImageSize", params:'"[2M]"'},
+    {method:"setPostviewImageSize", params:'["2M"]'},
     {method:"actTakePicture", params:'[]'},
     {method:"awaitTakePicture", params:'[]'},
     {method:"startLiveview", params:'[]'},
@@ -20,6 +20,8 @@ var actions = [
  window.addEventListener("load", function()
  {
     console.log("--- Camera Remote API application starts ---");
+    console.log("User Agent: " + navigator.userAgent);
+    console.log("App Version: " + window.navigator.appVersion.toLowerCase());
 
     // Init CameraRemoteAPI
     var camera = new CameraRemoteAPI();
@@ -55,9 +57,17 @@ var actions = [
     }
     select.addEventListener('change', function() {
         console.log("-- Change Action ---");
-        var select = document.getElementById("actions");
-        console.log(select.value);
+        var action = document.getElementById("actions").value;
+        console.log(action);
+
+        var params = document.getElementById("action-parames");
+        params.value = actions[action].params;
+        //params.value = "hello";
+
     });
+    var event = document.createEvent( "MouseEvents" );
+    event.initEvent("change", false, true);
+    select.dispatchEvent(event);
 
     document.getElementById("send-json-message").onclick = function(){
         console.log("--- Send Message ---")
@@ -69,18 +79,20 @@ var actions = [
         console.log(actions[action].method);
 
         camera.setActionListUrl(actionListUrl);
-        camera[actions[action].method](actions[action].params,
+        var id = camera[actions[action].method](actions[action].params,
             // success callback
             function(id, response){
                 console.log("--- success response ---")
                 console.log("method: " + actions[action].method);
                 console.log("id: " + id);
                 console.log(response);
+                document.getElementById("response-id").value = id;
+                document.getElementById("response-parames").value = response;
                 // capture still picture
                 if(actions[action].method == "actTakePicture")
                 {
-                    console.log("--- actTakePicture ---")
-                    LoadImage(response[0][0]);
+                    console.log("--- actTakePicture ---");
+                    LoadImage(response);
                 }
             },
             // error callback
@@ -90,25 +102,34 @@ var actions = [
                 console.log(error);
             }
         );
+        document.getElementById("action-id").value = id;
     };
 });
 
 var LoadImage = function(url)
 {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'blob';
+    console.log("--- LoadImage ----");
+    console.log("url: " + url);
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var blob = xhr.response;
-            var area = document.getElementById("image-area");
-            var img = document.createElement("img");
-            img.height = 200;
-            //img.src = url;
-            img.src = window.URL.createObjectURL(blob);
-            area.appendChild(img);
-        }
-    };
-    xhr.send();
+    var userAgent = window.navigator.userAgent.toLowerCase();
+    // Android Apk
+    if(userAgent.indexOf('android') != -1) {
+        var img = document.getElementById("shoot-image");
+        img.height = 200;
+        img.src = url;
+    } else { // Chromw Web app
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'blob';
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var blob = xhr.response;
+                var img = document.getElementById("shoot-image");
+                img.height = 200;
+                img.src = window.URL.createObjectURL(blob);
+            }
+        };
+        xhr.send();
+    }
 };
