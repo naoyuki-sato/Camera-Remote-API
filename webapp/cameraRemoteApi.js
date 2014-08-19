@@ -10,6 +10,7 @@ function CameraRemoteAPI(actionListUrl) {
 		"startAudioRec",
 		"stopAudioRec",
 		"startLiveview",
+		"startLiveviewWithSize",
 		"stopLiveview",
 		"actZoom",
 		"setSelfTimer",
@@ -56,7 +57,7 @@ function CameraRemoteAPI(actionListUrl) {
 				xhr.open('POST', this.endPointUrl, true);
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				xhr.send(message);
-				
+
 				return id;
 			};
 		})(i);
