@@ -90,7 +90,7 @@ var actions = [
                     console.log("--- actTakePicture ---");
                     LoadImage(response);
                 } else if(actions[action].method == "startLiveview") {
-                    GetLiveviewData(response, function(base64Data) {
+                    camera.getLiveviewData(response, function(base64Data) {
                         document.getElementById('shoot-image').src = "data:image/jpeg;base64," + base64Data;
                     });
                 }
@@ -106,6 +106,7 @@ var actions = [
     };
 });
 
+/*
 var CRA_LIVEVIEW_MAX_RECEIVE_SIZE = 1000000;
 var CRA_LIVEVIEW_COMMON_HEADER_SIZE = 8;
 var CRA_LIVEVIEW_PLAYLOAD_HEADER_SIZE = 128;
@@ -175,6 +176,7 @@ var GetLiveviewData = function(targetUrl, dataCallback) {
     };
     xhr.send();
 }
+*/
 
 
 var LoadImage = function(url)
