@@ -1,6 +1,14 @@
 Camera-Remote-API
 =================
 
+NOW support Liveview!! and please try it.
+
+to start Livewview
+* for NEX-5R, call "startRecMode" and call "startLiveview"
+* for HDR-AS15, call "startLiveview"
+
+----
+
 Control Sony Device via Camera Remote API
 
 This is Web app sample implementation that controls Sony Device via [Camera Remote API](http://developer.sony.com/develop/cameras/).
